@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 database/files/*
 !database/files/.gitkeep
+migrations
 .idea
 __pycache__/
 *.py[cod]
