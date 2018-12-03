@@ -1,4 +1,7 @@
 # Byte-compiled / optimized / DLL files
+database/files/*
+!database/files/.gitkeep
+.idea
 __pycache__/
 *.py[cod]
 *$py.class
