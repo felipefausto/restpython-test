@@ -1,0 +1,41 @@
+version: "3.1"
+services:
+  python:
+    build: .
+    restart: always
+    container_name: pdv-python
+    working_dir: /application/public
+    volumes:
+      - .:/application
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    networks:
+      pdv_api_net:
+        ipv4_address: 172.28.1.3
+
+  mysql:
+    image: mysql:8.0.12
+    restart: always
+    container_name: pdv-mysql
+    volumes:
+      - ./database/files:/var/lib/mysql
+      - ./database/conf:/etc/mysql/conf.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=pdv
+    ports:
+      - "3306:3306"
+    networks:
+      pdv_api_net:
+        ipv4_address: 172.28.1.2
+
+networks:
+  pdv_api_net:
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.28.0.0/16
